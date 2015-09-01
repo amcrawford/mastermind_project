@@ -75,7 +75,7 @@ end
 
 def game_flow
   secret_sequence = generate_secret_sequence
-  puts "The secret sequence is #{secret_sequence}"
+  puts "**** The secret sequence is #{secret_sequence} ****"
   puts  "I have generated a beginner sequence with four elements made up of: (r)ed,
         (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
         What's your guess?"
