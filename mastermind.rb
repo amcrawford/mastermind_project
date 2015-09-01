@@ -1,5 +1,5 @@
 def instructions
-  "Guess the correct sequence of colors!"
+  puts "Guess the correct sequence of colors!"
 end
 
 def quit
@@ -15,19 +15,6 @@ def generate_secret_sequence
   secret_sequence
 end
 
-def letters_correct(response, secret_sequence)
-  response_array = response.split("")
-  secret_sequence_array = secret_sequence.split("")
-  correct_letters = []
-  4.times do |i|
-    if secret_sequence_array.include?(response_array[i])
-        correct_letters << response_array[i]
-        secret_sequence_array.delete_at(secret_sequence.index(response_array[i]))
-    end
-  end
-    return correct_letters.length.to_s
-end
-
 def sequence_correct(response, secret_sequence)
   response_array = response.split("")
   secret_sequence_array = secret_sequence.split("")
@@ -38,6 +25,21 @@ def sequence_correct(response, secret_sequence)
     end
   end
     return correct_positions.length.to_s
+end
+
+def letters_correct(response, secret_sequence)
+  response_array = response.split("")
+  secret_sequence_array = secret_sequence.split("")
+  correct_letters = []
+  4.times do |i|
+    if secret_sequence_array.include?(response_array[i])
+        correct_letters << response_array[i]
+        puts secret_sequence.index(response_array[i]).inspect
+        secret_sequence_array.delete_at(secret_sequence_array.index(response_array[i]))
+        puts secret_sequence_array.inspect
+    end
+  end
+    return correct_letters.length.to_s
 end
 
 def give_user_feedback(response, secret_sequence, number_of_guesses)
@@ -65,7 +67,7 @@ def eval_player_guess(player_guess, secret_sequence, number_of_guesses)
   if player_guess.length == 4
     give_user_feedback(player_guess, secret_sequence, number_of_guesses)
   elsif player_guess == "c"
-    puts secret_sequence
+    puts "The secret is #{secret_sequence}"
   end
   return player_guess.to_s
 end
@@ -77,15 +79,15 @@ def game_flow
         (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
         What's your guess?"
   start_time = Time.now
-  @minutes = 0
-  @seconds = 0
-  number_of_guesses = 0
-  player_guess = ""
+    @minutes = 0
+    @seconds = 0
+    number_of_guesses = 0
+    player_guess = ""
   loop do
   player_guess = gets.chomp.downcase
   number_of_guesses += 1
-  #entered a new one
   @new_player_guess = eval_player_guess_length(player_guess, secret_sequence, number_of_guesses)
+
   break if player_guess == secret_sequence || player_guess == "q" || @new_player_guess == secret_sequence || @new_player_guess == "q"
   end
   if player_guess == "q" || @new_player_guess == "q"
@@ -114,7 +116,7 @@ def start_game
 puts "Welcome to MASTERMIND"
 
 puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-player_start_choice = gets.chomp
+player_start_choice = gets.chomp.downcase
   if player_start_choice == "p"
     game_flow
   elsif player_start_choice == "i"
@@ -125,3 +127,9 @@ player_start_choice = gets.chomp
 end
 
 start_game
+
+
+# Notes
+  # No extensions
+  # Mixed use of "response" and "user answer"
+  # ERROR: For secret "ggyg" - answer "gggg" shows as having 4 correct elements
