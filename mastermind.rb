@@ -121,6 +121,7 @@ player_start_choice = gets.chomp.downcase
     game_flow
   elsif player_start_choice == "i"
     instructions
+    game_flow
   elsif player_start_choice == "q"
     quit
   end
