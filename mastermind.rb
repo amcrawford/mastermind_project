@@ -35,9 +35,7 @@ def letters_correct(response, secret_sequence)
   4.times do |i|
     if secret_sequence_array.include?(response_array[i])
         correct_letters << response_array[i]
-        puts secret_sequence.index(response_array[i]).inspect
         secret_sequence_array.delete_at(secret_sequence_array.index(response_array[i]))
-        puts secret_sequence_array.inspect
     end
   end
     return correct_letters.length.to_s
