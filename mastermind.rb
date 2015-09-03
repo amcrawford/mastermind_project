@@ -1,5 +1,5 @@
 def instructions
-  puts "=== Instructsions ==="
+  puts "=== Instructions ==="
   puts "Guess the correct sequence of colors!"
 end
 
